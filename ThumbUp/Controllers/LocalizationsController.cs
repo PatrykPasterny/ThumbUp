@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using ThumbUp.Models;
 
 namespace ThumbUp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
     public class LocalizationsController : ControllerBase
     {
         private readonly Context _context;
@@ -24,7 +27,8 @@ namespace ThumbUp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Localization>>> GetLocalizations()
         {
-            return await _context.Localizations.ToListAsync();
+            throw new Exception("DupaException");
+            return await _context.Localizations.Include(l => l.LocRatings).ToListAsync();
         }
 
         // GET: api/Localizations/5

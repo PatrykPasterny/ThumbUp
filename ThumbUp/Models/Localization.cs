@@ -19,7 +19,7 @@ namespace ThumbUp.Models
         public long LocID { get; set; }
         public string LocName { get; set; }
         public string LocDescription { get; set; }
-        public decimal LocRatingsAvg => LocRatings.Sum(lra => lra.LRaRating);
+        public decimal LocRatingsAvg => (decimal)LocRatings.Sum(lra => lra.LRaRating) / (LocRatings.Any() ? LocRatings.Count : 1.0m);
         public ICollection<LocalizationRating> LocRatings { get; set; }
     }
 }

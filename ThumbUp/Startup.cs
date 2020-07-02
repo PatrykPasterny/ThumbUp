@@ -23,6 +23,12 @@ namespace ThumbUp
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ThumbUpDatabase")));
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddControllers().AddNewtonsoftJson();
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://thumbupappfe.azurewebsites.net"));
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44386"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +45,7 @@ namespace ThumbUp
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseCors(options => options.WithOrigins("http://thumbupappfe.azurewebsites.net", "https://localhost:44386"));
         }
     }
 }

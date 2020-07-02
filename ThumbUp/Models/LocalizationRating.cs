@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,6 +17,7 @@ namespace ThumbUp.Models
         public string LRaOpinion { get; set; }
         public long LRaLocID { get; set; }
         [ForeignKey("LRaLocID")]
+        [JsonIgnore]
         public Localization Localization { get; set; }
     }
 }
