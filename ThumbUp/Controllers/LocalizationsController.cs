@@ -27,7 +27,6 @@ namespace ThumbUp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Localization>>> GetLocalizations()
         {
-            throw new Exception("DupaException");
             return await _context.Localizations.Include(l => l.LocRatings).ToListAsync();
         }
 
